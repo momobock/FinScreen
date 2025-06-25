@@ -1,108 +1,85 @@
-# FinScreen MVP
+# 📄 FinScreen PDF Extractor
 
-This is the MVP for **FinScreen**, a SaaS platform that automates the onboarding and screening of crowdfunding campaigns using AI-powered document analysis.
+A lightweight Streamlit app to extract structured business information from PDF documents using OpenAI's GPT-4o-mini. Built for screening crowdinvesting campaign materials quickly and efficiently.
 
-It is implemented as a Jupyter Notebook using Python and OpenAI's GPT models to extract structured campaign information from uploaded PDF files.
+## 🚀 Features
 
----
+* Upload one or more PDF documents per company
+* Automatically extract key business fields such as:
 
-## 🧠 Features
+  * Company Name
+  * Industry
+  * Funding Requested (EUR)
+  * Revenue Last Year (EUR)
+  * EBIT (EUR)
+  * Use of Funds
+  * Business Model
+  * Target Market
+  * Go-To-Market Strategy
+  * Team Info
+  * Vision
+  * Mission
+* Compliance checklist showing presence of essential fields
+* Download extracted data as CSV
 
-- Upload **multiple PDFs** per company
-- Automatically **extract**:
-  - Company name
-  - Funding requested
-  - Revenue & EBIT
-  - Business model, GTM strategy
-  - Use of funds, mission, team info
-- Generate a **compliance checklist**
-- Fully supports **GPT-3.5** or **GPT-4o** extraction
+## 🧠 Powered by
 
----
+* **OpenAI GPT-4o-mini** for zero-shot information extraction
+* **PyMuPDF** (`fitz`) for reliable PDF parsing
+* **Streamlit** for the interactive user interface
+* **pandas** for data manipulation and CSV export
 
-## 🚀 How to Use
+## 🔑 Setup
 
-### 1. Activate your environment
+### 1. Create and activate a virtual environment
+
+Using `venv`:
+
 ```bash
+python -m venv finscreen-env
+source finscreen-env/bin/activate  # macOS/Linux
+# OR
+finscreen-env\Scripts\activate   # Windows
+```
+
+Or using `conda`:
+
+```bash
+conda create -n finscreen-env python=3.10
 conda activate finscreen-env
 ```
 
-### 2. Install dependencies
+### 2. Add your OpenAI API key
+
+For testing purposes my API key is added but will be deactivated after the grading of the assignment. 
+
+### 3. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Set your OpenAI API key
-**Option A (recommended):** Use an environment variable
+### 4. Run the app
+
 ```bash
-export OPENAI_API_KEY="your-key-here"
+streamlit run app.py
 ```
 
-**Option B:** Set directly in code
-```python
-from openai import OpenAI
-client = OpenAI(api_key="your-key-here")
-```
+## 🗂️ Output
+
+* Extracted information is displayed as a formatted JSON block
+* Compliance checklist shows presence or absence of key fields
+* One-click CSV download for storing extracted results
+
+## ⚡ Notes
+
+* Only the first \~3000 characters of each PDF are sent to the LLM due to token limits
+* If the returned response contains invalid JSON, the app attempts to clean and parse it
+
+## 🚩 Caution
+
+This is an MVP prototype. It assumes semi-structured business documents and may not generalize well to poorly formatted or overly technical PDFs.
 
 ---
 
-## 📂 Running the Notebook
-
-1. Start Jupyter Notebook:
-```bash
-jupyter notebook
-```
-
-2. Open `FinScreen_MVP.ipynb`
-
-3. Set company name and PDF list:
-```python
-company_name = "GreenFlow Solutions"
-pdf_files = ["sample_campaign.pdf"]
-```
-
-4. Run the pipeline:
-```python
-results = process_company_pdfs_llm(company_name, pdf_files)
-```
-
----
-
-## 📊 Output
-
-### Extracted Info
-```python
-results["extracted_info"]
-```
-
-### Compliance Checklist
-```python
-results["checklist"]
-```
-
----
-
-## 🧾 Requirements
-
-```txt
-openai>=1.3.0
-pdfplumber>=0.10.0  # or pymupdf>=1.22.0 if working
-pandas>=1.5.0
-matplotlib>=3.7.0
-ipykernel>=6.29.0
-notebook>=7.0.0
-```
-
----
-
-## 📌 Notes
-
-- This version uses **GPT** for extraction and skips benchmarking for simplicity.
-- You can add benchmarks, visualizations, or validation as future features.
-
----
-
-## 🔒 Security
-
-- Never upload confidential PDFs without checking OpenAI data usage terms.
-- Always keep your `OPENAI_API_KEY` secret.
+**FinScreen MVP – Making early-stage investment screening smarter with AI.**
