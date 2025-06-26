@@ -51,7 +51,8 @@ conda activate finscreen-env
 
 ### 2. Add your OpenAI API key
 
-For testing purposes my API key is added but will be deactivated after the grading of the assignment. 
+Add the API key that I provided in the comments of the assignments to the code where it says "INSERT_HERE".
+
 
 ### 3. Install dependencies
 
